@@ -1,5 +1,6 @@
 package com.example.Assignment.controller;
 
+import com.example.Assignment.Data.CustomerDto;
 import com.example.Assignment.entity.Customer;
 import com.example.Assignment.service.implementation.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,15 @@ public class UserController {
     CustomerServiceImpl customerServiceImpl;
 
 
-    @PostMapping("/save")
-    public Customer saveUser(@RequestBody Customer customer){
-        return customerServiceImpl.addCustomer(customer);
+//    @PostMapping("/save")
+//    public Customer saveUser(@RequestBody Customer customer){
+//        return customerServiceImpl.addCustomer(customer);
+//    }
+
+
+    @PostMapping(value = "/add")
+    public Customer saveUser(@RequestBody CustomerDto customerDto){
+        return customerServiceImpl.saveCustomer(customerDto);
     }
 
 
