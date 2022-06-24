@@ -1,19 +1,17 @@
 package com.example.Assignment.Data;
 
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
-public class MyCustomerPrincipal extends User {
+public class CustomerDetails extends User {
 
     private long userId;
 
     private String username;
 
 
-    public MyCustomerPrincipal(long userId, String username, String password) {
+    public CustomerDetails(long userId, String username, String password) {
         super(username,password , new ArrayList<>());
         this.userId = userId;
         this.username = username;

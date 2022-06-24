@@ -1,6 +1,6 @@
 package com.example.Assignment.Util;
 
-import com.example.Assignment.Data.MyCustomerPrincipal;
+import com.example.Assignment.Data.CustomerDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -44,7 +44,7 @@ public class JwtUtil {
 
 
     //method to generate the token
-    public String generateToken(MyCustomerPrincipal myCustomerPrincipal){
+    public String generateToken(CustomerDetails myCustomerPrincipal){
         Map<String, Object> claims = new HashMap<>();
         return createToken(claims, myCustomerPrincipal.getUsername());
     }
@@ -57,7 +57,7 @@ public class JwtUtil {
     }
 
     //validate token
-    public Boolean validateToken(String token, MyCustomerPrincipal myCustomerPrincipal){
+    public Boolean validateToken(String token, CustomerDetails myCustomerPrincipal){
         final String username = extractUsername(token);
         return (username.equals(myCustomerPrincipal.getUsername()) && !isTokenExpired(token));
     }

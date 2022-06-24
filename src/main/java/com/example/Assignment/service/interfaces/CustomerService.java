@@ -2,10 +2,11 @@ package com.example.Assignment.service.interfaces;
 
 import com.example.Assignment.Data.CustomerDto;
 import com.example.Assignment.entity.Customer;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface CustomerServicce {
+public interface CustomerService extends UserDetailsService {
 
 //    public Customer addCustomer(Customer customer);
 
