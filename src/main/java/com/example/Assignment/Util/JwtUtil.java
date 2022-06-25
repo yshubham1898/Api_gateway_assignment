@@ -1,9 +1,11 @@
 package com.example.Assignment.Util;
 
 import com.example.Assignment.Data.CustomerDetails;
+import com.example.Assignment.repo.CustomerRepo;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -13,6 +15,9 @@ import java.util.function.Function;
 
 @Component
 public class JwtUtil {
+
+    @Autowired
+    CustomerRepo customerRepo;
 
     //secret key is used to create a signature
     private String SECRET_KEY = "secret";
@@ -42,12 +47,13 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
 
-
+    //change-----------------------------------------------------------------//
     //method to generate the token
     public String generateToken(CustomerDetails myCustomerPrincipal){
         Map<String, Object> claims = new HashMap<>();
         return createToken(claims, myCustomerPrincipal.getUsername());
     }
+    //---------------------------------------------------------------------//
 
     //create a token
     private String createToken(Map<String, Object> claims, String subject){

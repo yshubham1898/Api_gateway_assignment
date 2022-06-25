@@ -37,10 +37,8 @@ public class JwtFilter extends OncePerRequestFilter {
         String jwt = null;
 
         if(header != null && header.startsWith("Bearer ")){
-
             //storing the jwt in the jwt variable, coz the actual token will start from 7th index after bearer
             jwt = header.substring(7);
-
             //extracting username from jwt token
             username = jwtUtil.extractUsername(jwt);
         }
@@ -49,15 +47,13 @@ public class JwtFilter extends OncePerRequestFilter {
         //this will be achieved using SecurityContextholder
 
         if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
-
            //getting user details for authentication wrap in myCustomerPrincipal object
             CustomerDetails customerDetails = (CustomerDetails) this.customerServiceImpl.loadUserByUsername(username);
 
             //validate the token with user details in myCustomerPrincipal
             if(jwtUtil.validateToken(jwt,customerDetails)){
-
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                        new UsernamePasswordAuthenticationToken(customerDetails,null,new ArrayList<>());
+                        new UsernamePasswordAuthenticationToken(customerDetails,null,customerDetails.getAuthorities());
 
                 usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 

@@ -5,6 +5,7 @@ import javax.persistence.*;
 @Entity
 public class Customer {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")

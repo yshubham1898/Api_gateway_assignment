@@ -22,16 +22,16 @@ public class UserController {
 //    }
 
 
-    @PostMapping(value = "/add")
-    public Customer saveUser(@RequestBody CustomerDto customerDto){
-        return customerServiceImpl.saveCustomer(customerDto);
-    }
-
 
     @RequestMapping(value = "/all",method = RequestMethod.GET)
     public List<Customer> getAllCustomer(){
         List<Customer> customers =  customerServiceImpl.getAllCustomer();
         return customers;
+    }
+
+    @RequestMapping(value = "/public",method = RequestMethod.GET)
+    public String hello(){
+        return "Hello User!!!!";
     }
 
 }
