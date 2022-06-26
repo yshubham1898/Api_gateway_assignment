@@ -42,6 +42,7 @@ public class JwtUtil {
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
     }
 
+
     //check if token has expired or not
     private Boolean isTokenExpired(String token){
         return extractExpiration(token).before(new Date());
@@ -51,6 +52,8 @@ public class JwtUtil {
     //method to generate the token
     public String generateToken(CustomerDetails myCustomerPrincipal){
         Map<String, Object> claims = new HashMap<>();
+
+
         return createToken(claims, myCustomerPrincipal.getUsername());
     }
     //---------------------------------------------------------------------//
@@ -67,7 +70,6 @@ public class JwtUtil {
         final String username = extractUsername(token);
         return (username.equals(myCustomerPrincipal.getUsername()) && !isTokenExpired(token));
     }
-
 
 
 

@@ -17,6 +17,12 @@ public class Customer {
     @Column(name = "password")
     private String password;
 
+    private String email;
+
+
+    private String role;
+
+
     public Customer(long id, String username, String password) {
         this.id = id;
         this.username = username;
@@ -49,5 +55,21 @@ public class Customer {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

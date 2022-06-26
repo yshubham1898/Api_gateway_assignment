@@ -4,6 +4,7 @@ package com.example.Assignment.service.implementation;
 import com.example.Assignment.Data.CustomerDto;
 import com.example.Assignment.Data.CustomerDetails;
 import com.example.Assignment.entity.Customer;
+import com.example.Assignment.enums.Role;
 import com.example.Assignment.repo.CustomerRepo;
 
 import com.example.Assignment.service.interfaces.CustomerService;
@@ -22,7 +23,7 @@ public class CustomerServiceImpl implements CustomerService {
     CustomerRepo customerRepo;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private PasswordEncoder bcryptEncoder;
 
 
     //overridden method of UserDetailsService interface
@@ -39,12 +40,15 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
 
+
     //logic to add new user to database
     @Override
     public Customer saveCustomer(CustomerDto customerDto) {
         Customer customer = new Customer();
         customer.setUsername(customerDto.getUsername());
-        customer.setPassword(passwordEncoder.encode(customerDto.getPassword()));
+        customer.setPassword(bcryptEncoder.encode(customerDto.getPassword()));
+        customer.setEmail(customerDto.getEmail());
+        customer.setRole(Role.ROLE_USER.name());
         return customerRepo.save(customer);
     }
 
