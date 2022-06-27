@@ -20,16 +20,16 @@ public class AdminController {
 
 
     //the api will update the role attribute
-    @RequestMapping(value = "/user/{id}/role",method = RequestMethod.POST)
+    @PostMapping("/user/{id}/role")
     public Optional<Customer> getCustomer(@PathVariable("id") long id , @RequestBody UpdateRole role){
-        return this.customerServiceImpl.getCustomer(id,role.getRole());
+        return this.customerServiceImpl.getCustomer(id,role.getRole().name());
     }
 
 
     //api to get list of users.
     //admin can get all the list of users.
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @RequestMapping(value = "/all",method = RequestMethod.GET)
+    @GetMapping("/all")
     public List<Customer> getAllCustomer(){
         return customerServiceImpl.getAllCustomer();
     }

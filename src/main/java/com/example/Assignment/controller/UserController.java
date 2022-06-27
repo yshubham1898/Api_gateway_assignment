@@ -11,26 +11,17 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-//@RequestMapping("/user")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     CustomerServiceImpl customerServiceImpl;
 
 
-//    @PostMapping("/save")
-//    public Customer saveUser(@RequestBody Customer customer){
-//        return customerServiceImpl.addCustomer(customer);
-//    }
-
-
-    //it is a public api
-
-
 
     //it is a user api only authorised to user
     @PreAuthorize("hasAuthority('ROLE_USER')")
-    @RequestMapping(value = "/helloUser",method = RequestMethod.GET)
+    @GetMapping("/helloUser")
     public String user(){
         return "user!!";
     }

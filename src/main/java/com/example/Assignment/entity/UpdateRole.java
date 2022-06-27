@@ -1,19 +1,18 @@
 package com.example.Assignment.entity;
 
 
+import com.example.Assignment.enums.Role;
+
 public class UpdateRole {
 
-    private String role;
+    private Role role;
 
-    public UpdateRole(String role) {
-        this.role = role;
-    }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 }

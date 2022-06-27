@@ -44,15 +44,13 @@ public class SecurityConfig {
     }
 
 
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
                 .cors().and().csrf().disable()
                 .httpBasic().disable()
                 .authorizeRequests()
-                .antMatchers("/register","/hello").permitAll()
-                .antMatchers("/authenticate").permitAll()
+                .antMatchers("/register","/hello","/authenticate").permitAll()
                 .antMatchers("/user/**").hasRole("USER")
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
@@ -60,6 +58,4 @@ public class SecurityConfig {
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-
-
 }

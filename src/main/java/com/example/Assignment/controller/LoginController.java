@@ -35,7 +35,7 @@ public class LoginController {
 
 
     //api to authenticate user
-    @RequestMapping(value = "/authenticate",method = RequestMethod.POST)
+    @PostMapping("/authenticate")
     public ResponseEntity<?> authenticate(@RequestBody JwtRequest jwtRequest) throws Exception{
         try {
             authenticationManager.authenticate(
@@ -53,7 +53,7 @@ public class LoginController {
 
 
     //api to register users
-    @RequestMapping(value = "/register",method = RequestMethod.POST)
+    @PostMapping("/register")
     public Customer signup(@RequestBody JwtRequest jwtRequest){
         Customer customer = new Customer();
         customer.setUsername(jwtRequest.getUsername());
