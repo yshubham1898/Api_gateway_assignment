@@ -50,8 +50,8 @@ public class SecurityConfig {
                 .cors().and().csrf().disable()
                 .httpBasic().disable()
                 .authorizeRequests()
-                .antMatchers("/register","/hello","/authenticate").permitAll()
-                .antMatchers("/user/**").hasRole("USER")
+                .antMatchers("/register","/hello","/authenticate", "/v3/api-docs/**", "/swagger-ui/**").permitAll()
+                .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

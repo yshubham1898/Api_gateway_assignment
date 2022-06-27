@@ -3,8 +3,11 @@ package com.example.Assignment.entity;
 
 import com.example.Assignment.enums.Role;
 
+import javax.validation.constraints.NotNull;
+
 public class UpdateRole {
 
+    @NotNull
     private Role role;
 
 

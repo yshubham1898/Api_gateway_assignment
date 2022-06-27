@@ -3,6 +3,7 @@ package com.example.Assignment.entity.user_entity;
 import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,15 +15,17 @@ public class Customer {
     @Column(name = "user_id")
     private long id;
 
-    @Column(name = "user_name")
+
+    @Column(name = "user_name", unique = true, nullable = false)
     private String username;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(nullable = false, name = "email", unique = true)
     private String email;
 
-
+    @Column(nullable = false, name = "role", columnDefinition = "varchar(255) default 'ROLE_USER'")
     private String role;
 
 
