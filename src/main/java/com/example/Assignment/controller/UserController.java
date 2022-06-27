@@ -26,8 +26,7 @@ public class UserController {
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/all",method = RequestMethod.GET)
     public List<Customer> getAllCustomer(){
-        List<Customer> customers =  customerServiceImpl.getAllCustomer();
-        return customers;
+        return customerServiceImpl.getAllCustomer();
     }
 
 

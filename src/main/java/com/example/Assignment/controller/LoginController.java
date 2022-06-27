@@ -62,4 +62,6 @@ public class LoginController {
         customer.setRole(Role.ROLE_USER.name());
         return customerServiceImpl.signup(customer);
     }
+
+
 }

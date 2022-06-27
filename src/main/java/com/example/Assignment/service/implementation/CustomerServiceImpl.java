@@ -21,13 +21,9 @@ public class CustomerServiceImpl{
     @Autowired
     CustomerRepo customerRepo;
 
-    @Autowired
-    private PasswordEncoder bcryptEncoder;
-
     public Customer signup(Customer customer){
         return customerRepo.save(customer);
     }
-
 
     //logic to get all customers
     public List<Customer> getAllCustomer() {
