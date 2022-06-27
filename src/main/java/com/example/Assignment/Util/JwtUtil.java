@@ -1,16 +1,15 @@
 package com.example.Assignment.Util;
 
-import com.example.Assignment.Data.CustomerDetails;
+import com.example.Assignment.entity.user_entity.Customer;
 import com.example.Assignment.repo.CustomerRepo;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 @Component
@@ -50,11 +49,15 @@ public class JwtUtil {
 
     //change-----------------------------------------------------------------//
     //method to generate the token
-    public String generateToken(CustomerDetails myCustomerPrincipal){
+    public String generateToken(UserDetails userDetails) throws Exception{
         Map<String, Object> claims = new HashMap<>();
 
+        Set<String> userRoles = new HashSet<>();
+        Customer customer = customerRepo.findByUsername(userDetails.getUsername());
+        Arrays.stream(customer.getRole().split(",")).forEach(role -> userRoles.add(role));
+        claims.put("Roles",userRoles.toArray());
 
-        return createToken(claims, myCustomerPrincipal.getUsername());
+        return createToken(claims, userDetails.getUsername());
     }
     //---------------------------------------------------------------------//
 
@@ -66,9 +69,9 @@ public class JwtUtil {
     }
 
     //validate token
-    public Boolean validateToken(String token, CustomerDetails myCustomerPrincipal){
+    public Boolean validateToken(String token, UserDetails userDetails){
         final String username = extractUsername(token);
-        return (username.equals(myCustomerPrincipal.getUsername()) && !isTokenExpired(token));
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
 

@@ -1,24 +1,47 @@
-package com.example.Assignment.Data;
+package com.example.Assignment.entity.user_entity;
 
-public class CustomerDto {
+import org.hibernate.annotations.ManyToAny;
 
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+public class Customer {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id")
+    private long id;
+
+    @Column(name = "user_name")
     private String username;
 
+    @Column(name = "password")
     private String password;
 
     private String email;
+
+
     private String role;
 
 
-    public CustomerDto(String username, String password, String email, String role) {
+    public Customer(long id, String username, String password) {
+        this.id = id;
         this.username = username;
         this.password = password;
-        this.email = email;
-        this.role = role;
     }
 
-    public CustomerDto() {
+    public Customer() {
 
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getUsername() {

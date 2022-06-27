@@ -1,7 +1,6 @@
 package com.example.Assignment.controller;
 
-import com.example.Assignment.Data.CustomerDto;
-import com.example.Assignment.entity.Customer;
+import com.example.Assignment.entity.user_entity.Customer;
 import com.example.Assignment.service.implementation.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -40,7 +39,6 @@ public class UserController {
 
 
     //it is a user api only authorised to user
-
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @RequestMapping(value = "/user",method = RequestMethod.GET)
     public String user(){

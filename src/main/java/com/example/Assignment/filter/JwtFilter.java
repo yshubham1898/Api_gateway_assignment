@@ -1,12 +1,13 @@
 package com.example.Assignment.filter;
 
-import com.example.Assignment.Data.CustomerDetails;
 import com.example.Assignment.Util.JwtUtil;
+import com.example.Assignment.service.implementation.CustomerDetailsService;
 import com.example.Assignment.service.implementation.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -23,7 +24,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
 
     @Autowired
-    CustomerServiceImpl customerServiceImpl;
+    CustomerDetailsService customerDetails;
 
     @Autowired
     JwtUtil jwtUtil;
@@ -47,16 +48,16 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         //now we have to check whether any user is already logged in or not
-        //this will be achieved using SecurityContextholder
+        //this will be achieved using SecurityContext holder
 
         if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
            //getting user details for authentication wrap in myCustomerPrincipal object
-            CustomerDetails customerDetails = (CustomerDetails) this.customerServiceImpl.loadUserByUsername(username);
+            UserDetails userDetails = customerDetails.loadUserByUsername(username);
 
             //validate the token with user details in myCustomerPrincipal
-            if(jwtUtil.validateToken(jwt,customerDetails)){
+            if(jwtUtil.validateToken(jwt,userDetails)){
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                        new UsernamePasswordAuthenticationToken(customerDetails,null,customerDetails.getAuthorities());
+                        new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
 
                 usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 

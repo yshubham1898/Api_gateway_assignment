@@ -22,7 +22,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
-
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 @Configuration
 public class SecurityConfig {
@@ -52,7 +51,7 @@ public class SecurityConfig {
                 .cors().and().csrf().disable()
                 .httpBasic().disable()
                 .authorizeRequests()
-                .antMatchers("/register").permitAll()
+                .antMatchers("/register","/hello").permitAll()
                 .antMatchers("/authenticate").permitAll()
                 .antMatchers("/all").hasRole("ADMIN")
                 .antMatchers("/user").hasRole("USER")
