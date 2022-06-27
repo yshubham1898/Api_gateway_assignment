@@ -64,4 +64,10 @@ public class LoginController {
     }
 
 
+    @RequestMapping(value = "/hello",method = RequestMethod.GET)
+    public String hello(){
+        return "Hello User!!!!";
+    }
+
+
 }
